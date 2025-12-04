@@ -1,3 +1,5 @@
+import { Brand, Racket } from "@/lib/api";
+
 export const rackets = [
   {
     id: 1,
@@ -476,3 +478,20 @@ export const rackets = [
     },
   },
 ];
+
+const getUniqueBrands = (rackets: Racket[]): Brand[] => {
+  const uniqueBrands: Brand[] = [];
+  const seenIds = new Set<number>();
+
+  for (const racket of rackets) {
+    const brand = racket.brand;
+    if (!seenIds.has(brand.id)) {
+      seenIds.add(brand.id);
+      uniqueBrands.push(brand);
+    }
+  }
+
+  return uniqueBrands;
+};
+
+export const brands = getUniqueBrands(rackets);

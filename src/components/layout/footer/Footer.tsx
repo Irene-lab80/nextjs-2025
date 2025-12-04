@@ -1,3 +1,7 @@
+import s from "./Footer.module.css";
+
 export default function Footer() {
-  return <footer>Tennis Store. All rights reserved</footer>;
+  return (
+    <footer className={s.footer}>Tennis Store. All rights reserved</footer>
+  );
 }

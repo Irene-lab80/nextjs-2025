@@ -22,3 +22,9 @@ export interface Racket {
 export async function fetchProducts(): Promise<Racket[]> {
   return Promise.resolve(rackets);
 }
+
+export async function fetchProductById(
+  id: string
+): Promise<Racket | undefined> {
+  return Promise.resolve(rackets.find((el) => el.id === parseInt(id)));
+}

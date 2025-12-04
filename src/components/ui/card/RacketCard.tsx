@@ -1,11 +1,13 @@
 import { Racket } from "@/lib/api";
-import styles from "./RacketCard.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { getCurrency } from "@/lib/getCurrency";
+import { Routes } from "@/lib/routes";
+import styles from "./RacketCard.module.css";
 
 export default function RacketCard({ racket }: { racket: Racket }) {
   return (
-    <Link href={`/racket/${racket.id}`} className={styles.card}>
+    <Link href={`${Routes.RACKET}/${racket.id}`} className={styles.card}>
       <div className={styles.imageContainer}>
         <Image
           fill
@@ -16,8 +18,10 @@ export default function RacketCard({ racket }: { racket: Racket }) {
         />
       </div>
 
-      <div>{racket.name}</div>
-      <div>{racket.price}</div>
+      <div className={styles.info}>
+        <div>{racket.name}</div>
+        <div>{getCurrency(racket.price)}</div>
+      </div>
     </Link>
   );
 }
