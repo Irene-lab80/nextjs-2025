@@ -8,7 +8,7 @@ export default async function RacketListPage() {
 
   try {
     const res = await fetchProducts();
-    data = res;
+    data = res.data;
   } catch (e) {
     error = e as Error;
   }

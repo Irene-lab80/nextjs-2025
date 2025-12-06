@@ -10,7 +10,7 @@ export default async function Home() {
   let error = null;
 
   try {
-    const res = await fetchProducts();
+    const { data: res } = await fetchProducts();
     data = res;
   } catch (e) {
     console.error("Failed to fetch data:", error);

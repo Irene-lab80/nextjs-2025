@@ -5,8 +5,8 @@ import RacketCard from "../card/RacketCard";
 export default function RacketList({ rackets }: { rackets: Racket[] }) {
   return (
     <div className={styles.list}>
-      {rackets.map((el) => (
-        <RacketCard key={el.id} racket={el} />
+      {rackets.map((racket) => (
+        <RacketCard key={racket.id} racket={racket} />
       ))}
     </div>
   );

@@ -19,12 +19,43 @@ export interface Racket {
   brand: Brand;
 }
 
-export async function fetchProducts(): Promise<Racket[]> {
-  return Promise.resolve(rackets);
+type SuccessResponse<T> = {
+  data: T;
+  error: null;
+};
+
+type ErrorResponse = {
+  data: null;
+  error: Error;
+};
+
+type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;
+
+export async function apiWrapper<T>(
+  promise: Promise<T>,
+  errorMessage?: string
+): Promise<ApiResponse<T>> {
+  try {
+    const data = await promise;
+    return { data, error: null };
+  } catch (error) {
+    console.error(errorMessage || "API request failed:", error);
+
+    const apiError =
+      error instanceof Error ? error : new Error("Unknown error occurred");
+
+    return { data: null, error: apiError };
+  }
+}
+
+export async function fetchProducts(): Promise<ApiResponse<Racket[]>> {
+  return apiWrapper(Promise.resolve(rackets));
 }
 
 export async function fetchProductById(
   id: string
-): Promise<Racket | undefined> {
-  return Promise.resolve(rackets.find((el) => el.id === parseInt(id)));
+): Promise<ApiResponse<Racket | undefined>> {
+  return apiWrapper(
+    Promise.resolve(rackets.find((el) => el.id === parseInt(id)))
+  );
 }

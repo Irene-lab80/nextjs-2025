@@ -4,6 +4,7 @@ import Header from "@/components/layout/header/Header";
 import Footer from "@/components/layout/footer/Footer";
 import s from "./layout.module.css";
 import "./globals.css";
+import classNames from "classnames";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={classNames(geistSans.variable, geistMono.variable)}>
         <Header />
         <main className={s.main}>{children}</main>
         <Footer />
