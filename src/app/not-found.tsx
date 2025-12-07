@@ -1,4 +1,3 @@
-// app/not-found.jsx
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -10,7 +9,6 @@ export default function Space404() {
   const starsCreated = useRef(false);
 
   useEffect(() => {
-    // Создаем звезды только на клиенте и один раз
     if (starsRef.current && !starsCreated.current) {
       createStars();
       starsCreated.current = true;
@@ -26,7 +24,6 @@ export default function Space404() {
         const star = document.createElement("div");
         star.className = styles.star;
 
-        // Рандомные параметры
         const size = Math.random() * 3 + 1;
         const left = Math.random() * 400;
         const top = Math.random() * 350;
@@ -36,9 +33,8 @@ export default function Space404() {
         star.style.height = `${size}px`;
         star.style.left = `${left}px`;
         star.style.top = `${top}px`;
-        star.style.opacity = opacity;
+        star.style.opacity = opacity.toString();
 
-        // Разные анимации мерцания
         const animationDuration = Math.random() * 6 + 3;
         const animationDelay = Math.random() * 5;
         star.style.animation = `${

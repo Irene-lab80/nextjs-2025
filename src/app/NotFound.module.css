@@ -74,9 +74,6 @@
   animation-iteration-count: infinite;
 }
 
-/* Генерация звезд с разными анимациями через CSS-in-JS или отдельный файл */
-/* Для простоты создадим несколько предопределенных анимаций */
-
 .star:nth-child(odd) {
   animation: twinkle1 5s infinite;
 }
