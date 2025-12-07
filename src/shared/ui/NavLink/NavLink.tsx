@@ -6,11 +6,10 @@ import s from "./NavLink.module.css";
 import cn from "classnames";
 
 type NavLinkProps = LinkProps & {
-  className?: string;
   children: ReactNode;
 };
 
-export const NavLink = ({ className, children, ...props }: NavLinkProps) => {
+export const NavLink = ({ children, ...props }: NavLinkProps) => {
   const pathname = usePathname();
   const isActive = pathname === props.href;
 

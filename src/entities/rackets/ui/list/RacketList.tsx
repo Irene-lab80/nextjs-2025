@@ -1,6 +1,6 @@
-import { Racket } from "@/lib/api";
 import styles from "./RacketList.module.css";
 import RacketCard from "../card/RacketCard";
+import { Racket } from "../../model/types";
 
 export default function RacketList({ rackets }: { rackets: Racket[] }) {
   return (
