@@ -8,9 +8,10 @@ export async function fetchProducts(
   } = { limit: 10, page: 1 }
 ): Promise<ApiResponse<Racket[]>> {
   const { limit, page } = options;
-  const params = new URLSearchParams();
-  params.append("page", String(page));
-  params.append("limit", String(limit));
+  const params = new URLSearchParams({
+    page: String(page),
+    limit: String(limit),
+  });
 
   const url = getApiUrl(`/products`, params);
   console.log("url", url);

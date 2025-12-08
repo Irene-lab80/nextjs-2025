@@ -39,5 +39,5 @@ const BASE_URL = "http://localhost:4000/api";
 export function getApiUrl(endpoint: string, params?: URLSearchParams): string {
   const base = `${BASE_URL}/${endpoint}`;
 
-  return params ? `${base}?=${params}}` : base;
+  return params ? `${base}?${params}` : base;
 }
