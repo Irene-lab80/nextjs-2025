@@ -7,7 +7,7 @@ import styles from "./Racket.module.css";
 export default async function Racket({ params }: PageProps<"/racket/[slug]">) {
   const { slug: productId } = await params;
   const { data, error } = await fetchProductById(productId);
-
+  console.log("data", data, error);
   if (error) {
     notFound();
   }

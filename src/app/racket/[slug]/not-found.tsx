@@ -1,10 +1,8 @@
-// components/NotFound/TennisSuperSimple404.jsx
-"use client";
-
 import Link from "next/link";
 import styles from "./not-found.module.css";
+import { Routes } from "@/lib/routes";
 
-export default function NotFound() {
+export default async function NotFound() {
   const rackets = [
     "Wilson Pro Staff",
     "Babolat Pure Drive",
@@ -35,10 +33,10 @@ export default function NotFound() {
       </div>
 
       <div className={styles.actions}>
-        <Link href="/" className={styles.button}>
+        <Link href={Routes.HOME} className={styles.button}>
           На главную
         </Link>
-        <Link href="/rackets" className={styles.buttonOutline}>
+        <Link href={Routes.RACKETS} className={styles.buttonOutline}>
           Все ракетки
         </Link>
       </div>

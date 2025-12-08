@@ -17,10 +17,12 @@ export async function apiWrapper<T>(
   try {
     const response = await promise;
     console.info("API Response", response);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+
     const data = await response.json();
+
+    if (!response.ok) {
+      return { data: null, error: data.error };
+    }
     console.info("Response data", data);
 
     return { data, error: null };
