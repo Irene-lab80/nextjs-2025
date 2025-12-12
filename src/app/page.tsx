@@ -32,13 +32,15 @@ export default async function Home() {
       {hasTop10 && (
         <RacketList
           rackets={data[1]}
-          title="Top 10"
-          href={Routes.TOP_10_RACKETS}
+          headerProps={{ title: "Top 10", href: Routes.TOP_10_RACKETS }}
         />
       )}
 
       {hasProducts && (
-        <RacketList rackets={data[0]} title="Ракетки" href={Routes.RACKETS} />
+        <RacketList
+          rackets={data[0]}
+          headerProps={{ title: "Ракетки", href: Routes.RACKETS }}
+        />
       )}
     </div>
   );

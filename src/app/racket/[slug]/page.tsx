@@ -3,11 +3,37 @@ import Image from "next/image";
 import { getCurrency } from "@/lib/getCurrency";
 import { fetchProductById } from "@/api/get-product-by-id";
 import styles from "./Racket.module.css";
+import { Metadata } from "next";
+import { fetchProductMetaById } from "@/api/get-meta-product-by-id";
 
-export default async function Racket({ params }: PageProps<"/racket/[slug]">) {
+type Props = PageProps<"/racket/[slug]">;
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug: productId } = await params;
+
+  const { data } = await fetchProductMetaById(productId);
+
+  if (data) {
+    return {
+      title: `${data?.product.name} | Tennis Store`,
+      description: data?.product.description,
+      openGraph: {
+        title: data?.product.name,
+        description: data?.product.description,
+        images: [data.product.imageUrl],
+      },
+    };
+  }
+
+  return {
+    title: "Tennis Store",
+  };
+}
+
+export default async function Racket({ params }: Props) {
   const { slug: productId } = await params;
   const { data, error } = await fetchProductById(productId);
-  console.log("data", data, error);
+
   if (error) {
     notFound();
   }

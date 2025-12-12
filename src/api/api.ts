@@ -18,10 +18,19 @@ export async function apiWrapper<T>(
     const response = await promise;
     console.info("API Response", response);
 
+    const contentType = response.headers.get("content-type");
+
+    if (!contentType?.includes("application/json")) {
+      throw new Error(`Expected JSON but got ${contentType}`);
+    }
+
     const data = await response.json();
 
     if (!response.ok) {
-      return { data: null, error: data.error };
+      return {
+        data: null,
+        error: data.error || new Error(`HTTP ${response.status}`),
+      };
     }
     console.info("Response data", data);
 

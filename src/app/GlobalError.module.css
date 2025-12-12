@@ -1,0 +1,18 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+
+  button {
+    all: unset;
+    padding: 20px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+}
