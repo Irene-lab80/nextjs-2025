@@ -5,5 +5,4 @@ export async function fetchProductById(
   productId: string
 ): Promise<ApiResponse<{ product: Racket }>> {
   return apiWrapper(fetch(getApiUrl(`/product/${productId}`)));
-  // return apiWrapper(fetch(getApiUrl(`/product-slow/${productId}`)));
 }

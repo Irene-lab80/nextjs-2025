@@ -1,48 +1,45 @@
 import RacketList from "@/entities/rackets/ui/list/RacketList";
-import Link from "next/link";
-import { LinkIcon } from "@/shared/icons/link";
 import { Routes } from "@/lib/routes";
 import { fetchProducts } from "@/api/get-products";
 import { fetchTop10Products } from "@/api/get-top-10-products";
 import { notFound } from "next/navigation";
-import styles from "./page.module.css";
 
 export default async function Home() {
-  const res = await Promise.allSettled([
+  const [products, top10Products] = await Promise.allSettled([
     fetchProducts({ page: 1, limit: 10 }),
     fetchTop10Products(),
   ]);
 
   const data = [
-    res[0].status === "fulfilled" && res[0].value.data ? res[0].value.data : [],
-    res[1].status === "fulfilled" && res[1].value.data ? res[1].value.data : [],
+    products.status === "fulfilled" && products.value.data
+      ? products.value.data
+      : [],
+    top10Products.status === "fulfilled" && top10Products.value.data
+      ? top10Products.value.data
+      : [],
   ];
 
-  if (res[0].status === "rejected" && res[1].status === "rejected") {
+  const hasProducts = products.status === "fulfilled" && products.value.data;
+  const hasTop10 =
+    top10Products.status === "fulfilled" && top10Products.value.data;
+
+  if (products.status === "rejected" && top10Products.status === "rejected") {
     notFound();
   }
 
   return (
     <div>
-      <div>
-        <div className={styles.top}>
-          <h2>Top 10</h2>
-          <Link className={styles.allButton} href={Routes.TOP_10_RACKETS}>
-            Все <LinkIcon />
-          </Link>
-        </div>
-        <RacketList rackets={data[1]} />
-      </div>
+      {hasTop10 && (
+        <RacketList
+          rackets={data[1]}
+          title="Top 10"
+          href={Routes.TOP_10_RACKETS}
+        />
+      )}
 
-      <div>
-        <div className={styles.top}>
-          <h2>Ракетки</h2>
-          <Link className={styles.allButton} href={Routes.RACKETS}>
-            Все <LinkIcon />
-          </Link>
-        </div>
-        <RacketList rackets={data[0]} />
-      </div>
+      {hasProducts && (
+        <RacketList rackets={data[0]} title="Ракетки" href={Routes.RACKETS} />
+      )}
     </div>
   );
 }
