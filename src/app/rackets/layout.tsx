@@ -1,37 +1,22 @@
-"use client";
-import { brands } from "@/data/mock";
+import { fetchBrands } from "@/api/get-brands";
+import Filters from "@/entities/rackets/ui/filters/Filters";
+import { notFound } from "next/navigation";
 import s from "./Layout.module.css";
-import { useState } from "react";
 
-export default function RacketListLayout({
+export default async function RacketListLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [selectedBrand, setSelectedBrand] = useState("all");
+  const { data: brands, error } = await fetchBrands();
+
+  if (error) {
+    notFound();
+  }
 
   return (
     <div className={s.wrapper}>
-      <div className={s.filters}>
-        Бренд
-        <ul className={s.list}>
-          <li
-            className={selectedBrand === "all" ? s.selected : ""}
-            onClick={() => setSelectedBrand("all")}
-          >
-            All
-          </li>
-          {brands.map((el) => (
-            <li
-              key={el.id}
-              className={selectedBrand === el.name ? s.selected : ""}
-              onClick={() => setSelectedBrand(el.name)}
-            >
-              {el.name}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Filters brands={brands} />
       {children}
     </div>
   );

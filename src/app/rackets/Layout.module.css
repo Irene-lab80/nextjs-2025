@@ -2,19 +2,3 @@
   display: flex;
   gap: 100px;
 }
-
-.list {
-  margin-top: 5px;
-}
-
-.list li {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-}
-
-.selected {
-  color: var(--active);
-}

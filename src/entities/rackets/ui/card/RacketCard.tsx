@@ -1,9 +1,9 @@
-import { Racket } from "@/lib/api";
 import Image from "next/image";
 import Link from "next/link";
 import { getCurrency } from "@/lib/getCurrency";
 import { Routes } from "@/lib/routes";
 import styles from "./RacketCard.module.css";
+import { Racket } from "../../model/types";
 
 export default function RacketCard({ racket }: { racket: Racket }) {
   return (
