@@ -5,6 +5,7 @@ import Footer from "@/shared/ui/layout/footer/Footer";
 import s from "./layout.module.css";
 import classNames from "classnames";
 import "./styles/globals.css";
+import NavigationProgress from "@/shared/ui/NavigationProgressbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +30,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={classNames(geistSans.variable, geistMono.variable)}>
+        <NavigationProgress />
+
         <Header />
         <main className={s.main}>{children}</main>
         <Footer />

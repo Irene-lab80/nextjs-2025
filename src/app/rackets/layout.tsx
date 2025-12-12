@@ -1,6 +1,5 @@
 import { fetchBrands } from "@/api/get-brands";
 import Filters from "@/entities/rackets/ui/filters/Filters";
-import { notFound } from "next/navigation";
 import s from "./Layout.module.css";
 
 export default async function RacketListLayout({
@@ -11,13 +10,14 @@ export default async function RacketListLayout({
   const { data: brands, error } = await fetchBrands();
 
   if (error) {
-    notFound();
+    <div className={s.wrapper}>{children}</div>;
   }
 
-  return (
-    <div className={s.wrapper}>
-      <Filters brands={brands} />
-      {children}
-    </div>
-  );
+  if (brands)
+    return (
+      <div className={s.wrapper}>
+        <Filters brands={brands} />
+        {children}
+      </div>
+    );
 }

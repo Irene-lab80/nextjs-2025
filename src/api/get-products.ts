@@ -14,6 +14,5 @@ export async function fetchProducts(
   });
 
   const url = getApiUrl(`/products`, params);
-  console.log("url", url);
   return apiWrapper(fetch(url));
 }
